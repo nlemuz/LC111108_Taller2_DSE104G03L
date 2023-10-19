@@ -24,7 +24,7 @@ FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
 create table Transacciones
 (
 id_cuenta int not null,
-id_transaccion int not null auto_increment,
+id_transaccion varchar(500) not null,
 retiro decimal,
 deposito decimal,
 saldo decimal,
@@ -46,4 +46,8 @@ insert into Cuenta values (2,10089711,100,'2023-10-18');
 select p.id_cliente as ID,p.nombres as Nombre,p.apellidos as Apellido,p.dui as DUI,c.id_cuenta as 'No-Cuenta',c.saldo as Saldo,c.fecha_creacion as Fecha from Cliente p inner join Cuenta c on p.id_cliente=c.id_cliente;
 select * from cliente;
 select * from cuenta;
+select * from Transacciones;
 select COUNT(*) from cliente p inner join cuenta c on p.id_cliente=c.id_cliente where dui="012401241";
+
+select t.id_cuenta as 'No. Cuenta',t.id_transaccion as Transaccion,t.retiro as Retiro,t.deposito as Deposito,c.saldo as 'Saldo Actul',t.fecha_retiro as 'Fecha Retiro',t.fecha_deposito as 'Fecha Deposito',concat(p.nombres," ",p.apellidos) as Titular,p.dui as DUI from Transacciones t inner join cuenta c on t.id_cuenta=c.id_cuenta inner join cliente p on p.id_cliente=c.id_cliente where dui="042397003" and t.id_cuenta = 10089710
+
